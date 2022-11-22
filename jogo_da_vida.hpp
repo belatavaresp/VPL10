@@ -1,6 +1,19 @@
 #pragma once
 
 #include <vector>
+#include <string>
+
+
+class ExcecaoCelulaInvalida : public std::exception{
+   public:
+   std::string what () {
+        return "Célula (" + std::to_string(linha) + ", " + std::to_string(coluna) + ") não é válida. Deseja continuar e ignorá-la? (s/n)?";
+    }
+   private:
+   int linha;
+   int coluna;
+   char erro;
+};
 
 // Implementa o Jogo da Vida de John Conway.
 // https://pt.wikipedia.org/wiki/Jogo_da_vida
