@@ -53,7 +53,6 @@ int main() {
     try
     {
       jogo.Reviver(linha, coluna);
-
     }
     catch(ExcecaoCelulaInvalida& e)
     {
