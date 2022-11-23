@@ -11,10 +11,14 @@ bool JogoDaVida::viva(int i, int j) {
 }
 
 void JogoDaVida::Matar(int i, int j) {
-  vivas_[i][j] = false;
+  throw vivas_[i][j] = false;
 }
 void JogoDaVida::Reviver(int i, int j) {
-  vivas_[i][j] = true;
+  if(i >= 0 && j >= 0 && i < linhas() && j < colunas()){
+    vivas_[i][j] = true;
+  }else{
+    throw ExcecaoCelulaInvalida(i,j);
+  }
 }
 
 int JogoDaVida::NumeroDeVizinhasVivas(int x, int y) {
@@ -51,4 +55,13 @@ void JogoDaVida::Executar(int n) {
   for (int i = 0; i < n; i++) {
     ExecutarProximaIteracao();
   }
+}
+
+std::string ExcecaoCelulaInvalida::what(){
+  return "Célula (" + std::to_string(linha) + ", " + std::to_string(coluna) + ") não é válida. Deseja continuar e ignorá-la? (s/n)?";
+}
+
+ExcecaoCelulaInvalida::ExcecaoCelulaInvalida(int linhas, int colunas){
+  this->coluna = colunas;
+  this->linha = linhas;
 }

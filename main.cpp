@@ -50,7 +50,22 @@ int main() {
   JogoDaVida jogo(numero_de_linhas, numero_de_colunas);
   int linha, coluna;
   while (cin >> linha >> coluna) {
+    try
+    {
       jogo.Reviver(linha, coluna);
+
+    }
+    catch(ExcecaoCelulaInvalida& e)
+    {
+      std::string result;
+      do{
+        std::cerr << e.what() << '\n';
+        std::cin >> result;
+        if(result == "n")
+          return 1;
+      }
+      while(result != "s" and result != "n");
+    }
   }
   cout << jogo << endl;
   
